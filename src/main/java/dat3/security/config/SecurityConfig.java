@@ -55,6 +55,13 @@ public class SecurityConfig {
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/api/auth/login")).permitAll()
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/api/user-with-role")).permitAll() //Clients can create a user for themself
 
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET,"/info")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET,"/categories")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET,"/recipes")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET,"/recipes/*")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST,"/recipes")).hasAnyAuthority("USER","ADMIN")
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT,"/recipes/*")).hasAnyAuthority("USER","ADMIN")
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE,"/recipes/*")).hasAnyAuthority("USER","ADMIN")
             //This is for demo purposes only, and should be removed for a real system
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/demo/anonymous")).permitAll()
 
